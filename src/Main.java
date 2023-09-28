@@ -13,9 +13,16 @@ public class Main {
         String jobPath = sc.nextLine();
         String jobId = sc.nextLine();
 
-        inputParser = new InputParser(exInterval,freqInterval,jobPath,jobId);
+        inputParser = new InputParser(exInterval, freqInterval, jobPath, jobId);
 
-        return;
-
+        int exIntervalms;
+        int freqIntervalms;
+        try {
+            exIntervalms = inputParser.getExInterval();
+            freqIntervalms = inputParser.getfreqInterval();
+        } catch (Exception e) {
+            throw new RuntimeException("Invalid Input");
+        }
+        //scheduler
     }
 }

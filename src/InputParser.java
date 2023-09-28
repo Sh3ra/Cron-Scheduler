@@ -1,3 +1,5 @@
+import java.util.regex.Pattern;
+
 public class InputParser {
     private String exInterval;
     private String freqInterval;
@@ -19,19 +21,72 @@ public class InputParser {
         return jobPath;
     }
 
-    public int getExInterval() {
+    public int getExInterval() throws Exception {
         return parseInterval(exInterval);
     }
 
-    public int getfreqInterval() {
+    public int getfreqInterval() throws Exception {
         return parseInterval(freqInterval);
     }
+    //1hr
+    //1m-1min
+    //1sec-1s
+    //1hr2sec
+    //1hr1min232s
+    private int parseInterval(String interval) throws Exception {
+        Exception invalidInputException = new Exception();
+        if(!validateInterval(interval))throw invalidInputException;
+        int ms=0;
+        StringBuilder temp = new StringBuilder();
+        int tms=0;
+        for (char c : interval.toCharArray()) {
+            if(isValidChar(c))
+            {
+                temp.append(c);
+            }
+            else if(isNumber(c))
+            {
+                if(!temp.isEmpty())
+                {
+                    ms+=calculateMS(tms,temp);
+                    temp= new StringBuilder();
+                    tms=0;
+                }
 
-    private int parseInterval(String interval)
-    {
-        int t;
-        t = Integer.parseInt(interval);
-        return t;
+                tms*=(10);
+                tms+=(c-'0');
+
+            }
+            else throw invalidInputException;
+        }
+        ms+=calculateMS(tms,temp);
+        return ms;
+    }
+
+    private int calculateMS(int tms, StringBuilder temp) {
+        int result=0;
+        if(Pattern.matches("^hr$|^h$",temp))
+        {
+            tms*=(1000*60*60);
+        }
+        else if (Pattern.matches("^m$|^min$",temp))
+        {
+            tms*=(1000*60);
+        }
+        else tms*=1000;
+        return tms;
+    }
+
+    private boolean validateInterval(String interval) {
+        return Pattern.matches("^([\\d]+(hr|h|min|m|sec|s)){1,3}$",interval);
+    }
+
+    private boolean isNumber(char c) {
+        return c>='0' && c<= '9';
+    }
+
+    private boolean isValidChar(char c) {
+        return (c>='a' && c<= 'z')|| (c>='A' && c<= 'Z');
     }
 
 }
