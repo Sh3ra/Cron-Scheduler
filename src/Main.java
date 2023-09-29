@@ -5,24 +5,29 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         InputParser inputParser;
-
+        Scheduler scheduler = new Scheduler();
         Scanner sc = new Scanner(System.in);
+        while(true) {
+            String exInterval = sc.nextLine();
+            String freqInterval = sc.nextLine();
+            String jobPath = sc.nextLine();
+            String jobId = sc.nextLine();
 
-        String exInterval = sc.nextLine();
-        String freqInterval = sc.nextLine();
-        String jobPath = sc.nextLine();
-        String jobId = sc.nextLine();
+            inputParser = new InputParser(exInterval, freqInterval, jobPath, jobId);
 
-        inputParser = new InputParser(exInterval, freqInterval, jobPath, jobId);
+            long exIntervalms;
+            long freqIntervalms;
+            try {
+                exIntervalms = inputParser.getExInterval();
+                freqIntervalms = inputParser.getfreqInterval();
+            } catch (Exception e) {
+                throw new RuntimeException("Invalid Input");
+            }
+            //scheduler
 
-        int exIntervalms;
-        int freqIntervalms;
-        try {
-            exIntervalms = inputParser.getExInterval();
-            freqIntervalms = inputParser.getfreqInterval();
-        } catch (Exception e) {
-            throw new RuntimeException("Invalid Input");
+            scheduler.addJob(exIntervalms, freqIntervalms, jobId, jobPath);
+            scheduler.execJob(jobId);
         }
-        //scheduler
+
     }
 }
