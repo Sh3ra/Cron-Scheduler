@@ -11,8 +11,9 @@ public class FrequencyThread implements Runnable {
 
     @Override
     public void run() {
-        //run execution thread
-        System.out.println("executing job" + jobId);
+        ExecutionThread executionThread = new ExecutionThread((String) jobData.get(2), (Long) jobData.get(0));
+        Thread exec = new Thread(executionThread);
+        exec.start();
         try {
             Thread.sleep((Long) jobData.get(1));
         } catch (InterruptedException e) {
