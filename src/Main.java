@@ -19,7 +19,7 @@ public class Main {
             long freqIntervalms;
             try {
                 exIntervalms = inputParser.getExInterval();
-                freqIntervalms = inputParser.getfreqInterval();
+                freqIntervalms = inputParser.getFreqInterval();
             } catch (Exception e) {
                 throw new RuntimeException("Invalid Input");
             }
@@ -27,7 +27,9 @@ public class Main {
 
             scheduler.addJob(exIntervalms, freqIntervalms, jobId, jobPath);
             scheduler.execJob(jobId);
-        }
 
+
+        }
     }
+
 }

@@ -1,10 +1,10 @@
 import java.util.regex.Pattern;
 
 public class InputParser {
-    private String exInterval;
-    private String freqInterval;
-    private String jobPath;
-    private String jobId;
+    private final String exInterval;
+    private final String freqInterval;
+    private final String jobPath;
+    private final String jobId;
 
     public InputParser(String exInterval, String freqInterval, String jobPath, String jobId) {
         this.exInterval = exInterval;
@@ -25,7 +25,7 @@ public class InputParser {
         return parseInterval(exInterval);
     }
 
-    public long getfreqInterval() throws Exception {
+    public long getFreqInterval() throws Exception {
         return parseInterval(freqInterval);
     }
 

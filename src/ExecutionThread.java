@@ -9,14 +9,16 @@ public class ExecutionThread implements Runnable{
     @Override
     public void run() {
         //exec job
-        System.out.println("executing job on path: " + jobPath);
-
+        JobRunner jobRunner = new JobRunner(jobPath);
+        Thread exec = new Thread(jobRunner);
+        exec.start();
         try {
             Thread.sleep(exInterval);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        //kill job
+        if(exec.isAlive())
+            exec.stop();
         System.out.println("job on path: " + jobPath+" ended");
     }
 }
