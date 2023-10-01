@@ -49,10 +49,8 @@ public class InputParser {
                     temp = new StringBuilder();
                     tms = 0;
                 }
-
                 tms *= (10);
                 tms += (c - '0');
-
             } else throw invalidInputException;
         }
         ms += calculateMS(tms, temp);

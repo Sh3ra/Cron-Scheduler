@@ -1,9 +1,16 @@
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static java.lang.System.exit;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
+    private final static Logger logger = Logger.getLogger(LoggerClass.class.getName());
     public static void main(String[] args) {
+        LoggerClass.init();
+        logger.log(Level.INFO,"Application Starting");
         InputParser inputParser;
         Scheduler scheduler = new Scheduler();
         Scanner sc = new Scanner(System.in);
@@ -20,15 +27,17 @@ public class Main {
             try {
                 exIntervalms = inputParser.getExInterval();
                 freqIntervalms = inputParser.getFreqInterval();
+                logger.log(Level.INFO,"Input Parsed");;
             } catch (Exception e) {
-                throw new RuntimeException("Invalid Input");
+                logger.log(Level.INFO,"Invalid Input");
+                System.out.println("Invalid Input");
+                continue;
             }
             //scheduler
 
             scheduler.addJob(exIntervalms, freqIntervalms, jobId, jobPath);
+            logger.log(Level.INFO,"Job Added");
             scheduler.execJob(jobId);
-
-
         }
     }
 
