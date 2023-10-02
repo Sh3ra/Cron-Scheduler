@@ -39,10 +39,10 @@ This is an in-process cron scheduler that accepts a job and executes it periodic
 # Example Usage 
 ##### The jobs meant to run:
 - Job 1
-![img.png](img.png)
+![img.png](ReadME imgs/img.png)
 - Job 2
 
-![img_1.png](img_1.png)
+![img_1.png](ReadME imgs/img_1.png)
 #### Enter the following input
 ```bash
 6sec
@@ -60,11 +60,11 @@ jobs/Test.java
 ```
 #### Job 1 is running for 2 seconds every 1 minute.
 #### Both jobs are running concurrently as shown in the log file.
-![img_3.png](img_3.png)
-![img_2.png](img_2.png)
-![img_4.png](img_4.png)
+![img_3.png](ReadME imgs/img_3.png)
+![img_2.png](ReadME imgs/img_2.png)
+![img_4.png](ReadME imgs/img_4.png)
 #### The output of job 1 is shown in out.txt file
-![img_5.png](img_5.png)
+![img_5.png](ReadME imgs/img_5.png)
 # Future Improvemnts
 - Support more job types not only restricted to java files.
 - Make the app listen on some port for requests rather than taking input from command line.
