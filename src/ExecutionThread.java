@@ -18,10 +18,10 @@ public class ExecutionThread implements Runnable {
         //exec job
         JobRunner jobRunner = new JobRunner(jobId, jobPath);
         Thread exec = new Thread(jobRunner);
-        logger.log(Level.INFO, "Job " + jobId + " Job Runner Created");
+        logger.log(Level.FINEST, "Job " + jobId + " Job Runner Created");
         long startTime = System.currentTimeMillis();
         exec.start();
-        logger.log(Level.INFO, "Job " + jobId + " Job Runner Started");
+        logger.log(Level.FINEST, "Job " + jobId + " Job Runner Started");
         try {
             Thread.sleep(exInterval);
         } catch (InterruptedException e) {
@@ -31,8 +31,8 @@ public class ExecutionThread implements Runnable {
         {
             exec.stop();
             long endTime = System.currentTimeMillis();
-            logger.log(Level.INFO, "Job " + jobId + " Job Execution Time: " + (endTime - startTime)+"ms");
+            logger.log(Level.FINEST, "Job " + jobId + " Job Execution Time: " + (endTime - startTime)+"ms");
         }
-        logger.log(Level.INFO, "Job " + jobId + " has Ended");
+        logger.log(Level.FINEST, "Job " + jobId + " has Ended");
     }
 }

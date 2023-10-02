@@ -10,7 +10,7 @@ public class Main {
     private final static Logger logger = Logger.getLogger(LoggerClass.class.getName());
     public static void main(String[] args) {
         LoggerClass.init();
-        logger.log(Level.INFO,"Application Starting");
+        logger.log(Level.FINEST,"Application Starting");
         InputParser inputParser;
         Scheduler scheduler = new Scheduler();
         Scanner sc = new Scanner(System.in);
@@ -27,16 +27,14 @@ public class Main {
             try {
                 exIntervalms = inputParser.getExInterval();
                 freqIntervalms = inputParser.getFreqInterval();
-                logger.log(Level.INFO,"Input Parsed");;
+                logger.log(Level.FINEST,"Input Parsed");;
             } catch (Exception e) {
-                logger.log(Level.INFO,"Invalid Input");
+                logger.log(Level.FINEST,"Invalid Input");
                 System.out.println("Invalid Input");
                 continue;
             }
-            //scheduler
-
             scheduler.addJob(exIntervalms, freqIntervalms, jobId, jobPath);
-            logger.log(Level.INFO,"Job Added");
+            logger.log(Level.FINEST,"Job Added");
             scheduler.execJob(jobId);
         }
     }

@@ -15,9 +15,9 @@ public class FrequencyThread implements Runnable {
     public void run() {
         ExecutionThread executionThread = new ExecutionThread(jobId,(String) jobData.get(2), (Long) jobData.get(0));
         Thread exec = new Thread(executionThread);
-        logger.log(Level.INFO,"Job "+jobId+" Execution Thread Created");
+        logger.log(Level.FINEST,"Job "+jobId+" Execution Thread Created");
         exec.start();
-        logger.log(Level.INFO,"Job "+jobId+" Execution Thread Started");
+        logger.log(Level.FINEST,"Job "+jobId+" Execution Thread Started");
         try {
             Thread.sleep((Long) jobData.get(1));
         } catch (InterruptedException e) {

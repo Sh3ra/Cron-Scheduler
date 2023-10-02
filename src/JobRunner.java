@@ -29,7 +29,7 @@ public class JobRunner implements Runnable {
 
     @Override
     public void run() {
-        logger.log(Level.INFO, "Job " + jobId + " Job execution Started");
+        logger.log(Level.FINEST, "Job " + jobId + " Job execution Started");
         long startTime = System.currentTimeMillis();
         Process p1;
         try {
@@ -41,7 +41,7 @@ public class JobRunner implements Runnable {
             logger.log(Level.SEVERE, "Job " + jobId + " Job Compilation failed!");
             throw new RuntimeException(e);
         }
-        logger.log(Level.INFO, "Job " + jobId + " Job Compilation with exitValue: " + p1.exitValue());
+        logger.log(Level.FINEST, "Job " + jobId + " Job Compilation with exitValue: " + p1.exitValue());
         Process p2;
         try {
             p2 = Runtime.getRuntime().exec("java -classpath jobs " + jobClass);
@@ -52,10 +52,10 @@ public class JobRunner implements Runnable {
             logger.log(Level.SEVERE, "Job " + jobId + " Job Running failed!");
             throw new RuntimeException(e);
         }
-        logger.log(Level.INFO, "Job " + jobId + " Job ran with exitValue: " + p2.exitValue());
+        logger.log(Level.FINEST, "Job " + jobId + " Job ran with exitValue: " + p2.exitValue());
         long endTime = System.currentTimeMillis();
-        logger.log(Level.INFO, "Job " + jobId + " Job Execution Time: " + (endTime - startTime)+"ms");
-        if (p2.exitValue() == 0) logger.log(Level.INFO, "Job " + jobId + " Job is Executed");
+        logger.log(Level.FINEST, "Job " + jobId + " Job Execution Time: " + (endTime - startTime)+"ms");
+        if (p2.exitValue() == 0) logger.log(Level.FINEST, "Job " + jobId + " Job is Executed");
     }
 
     private void printLines(InputStream ins) throws Exception {
@@ -63,7 +63,7 @@ public class JobRunner implements Runnable {
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(ins));
         while ((line = in.readLine()) != null) {
-            logger.log(Level.INFO, "Job " + jobId + " outPut: " + line);
+            logger.log(Level.FINEST, "Job " + jobId + " outPut: " + line);
         }
     }
 }
